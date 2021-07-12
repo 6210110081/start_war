@@ -18,15 +18,11 @@ class _StarwarsListState extends State<StarwarsList> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text('Page Startwars List'),
-        FlatButton(
-            onPressed: () async {
-              await _repo.repoPeopleStarwar();
-            },
-            child: Text('Check'))
-      ],
+    return ListView.builder(
+      itemCount: 5,
+      itemBuilder: (BuildContext context, int index) {
+        return Text('data');
+      },
     );
   }
 }
