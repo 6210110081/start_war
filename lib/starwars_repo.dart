@@ -1,16 +1,20 @@
 import 'package:dio/dio.dart';
 
 class People {
-  String name;
+  final String name;
   People(this.name);
+
+  factory People.fromJson(dynamic data) {
+    return People(data['name']);
+  }
 }
 
 class StarwarsRepo {
   var dio = Dio();
-  Future<List<dynamic>> repoPeopleStarwar() async {
-    var response = await dio.get('https://swapi.dev/people');
+  Future<List<People>> repoPeopleStarwar() async {
+    var response = await dio.get('https://swapi.dev/api/people');
     print('date = ' + response.data);
-    List<dynamic> peopleStarwars = response.data;
-    return peopleStarwars;
+    List<dynamic> peopleStarwars = response.data['results'];
+    return peopleStarwars.map((e) => People.fromJson(e)).toList();
   }
 }
