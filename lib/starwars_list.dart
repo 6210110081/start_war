@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:star_war/starwars_repo.dart';
 
 class StarwarsList extends StatefulWidget {
   @override
@@ -8,8 +9,18 @@ class StarwarsList extends StatefulWidget {
 }
 
 class _StarwarsListState extends State<StarwarsList> {
+  late final StarwarsRepo _repo;
   @override
+  Future<void> fetch() async {
+    var people = await _repo.repoPeopleStarwar();
+    print(people);
+  }
+
   Widget build(BuildContext context) {
-    return Text('Page Startwars List');
+    return Row(
+      children: [
+        Text('Page Startwars List'),
+      ],
+    );
   }
 }

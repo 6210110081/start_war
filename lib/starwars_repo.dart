@@ -7,10 +7,10 @@ class People {
 
 class StarwarsRepo {
   var dio = Dio();
-  Future<List<People>> repoPeopleStarwar() async {
+  Future<List<dynamic>> repoPeopleStarwar() async {
     var response = await dio.get('https://swapi.dev/people');
-    print(response);
-    List<People> peopleStarwars = [];
+    print('date = ' + response.data);
+    List<dynamic> peopleStarwars = response.data;
     return peopleStarwars;
   }
 }
