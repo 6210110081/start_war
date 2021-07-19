@@ -13,6 +13,7 @@ class _StarwarsListState extends State<StarwarsList> {
   final StarwarsRepo _repo;
   late List<People> _people;
   late int _page;
+  late bool _end;
 
   _StarwarsListState() : _repo = new StarwarsRepo();
 
@@ -22,6 +23,7 @@ class _StarwarsListState extends State<StarwarsList> {
     _page = 1;
     _people = [];
     freshPeople();
+    _end = false;
   }
 
   Future<void> freshPeople() async {
@@ -40,6 +42,7 @@ class _StarwarsListState extends State<StarwarsList> {
         if (index < _people.length) {
           return Card(
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Card(
                   child: Image.network(
@@ -48,31 +51,93 @@ class _StarwarsListState extends State<StarwarsList> {
                     width: 200,
                   ),
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "${_people[index].name}",
-                      style: TextStyle(
-                          fontSize: 30,
-                          color: Colors.red,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      "Height : ${_people[index].height}",
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.black,
-                          fontWeight: FontWeight.normal),
-                    ),
-                    Text(
-                      "Gender : ${_people[index].gender}",
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.black,
-                          fontWeight: FontWeight.normal),
-                    )
-                  ],
+                Container(
+                  height: 200,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "${_people[index].name}",
+                        style: TextStyle(
+                            fontSize: 30,
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            "Height : ",
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal),
+                          ),
+                          Text(
+                            "${_people[index].height}",
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.blue,
+                                fontWeight: FontWeight.normal),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            "Gender : ",
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal),
+                          ),
+                          Text(
+                            "${_people[index].gender}",
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.blue,
+                                fontWeight: FontWeight.normal),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            "Mass : ",
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal),
+                          ),
+                          Text(
+                            "${_people[index].mass}",
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.blue,
+                                fontWeight: FontWeight.normal),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            "Birth Year : ",
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal),
+                          ),
+                          Text(
+                            "Birth Year : ${_people[index].bday}",
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.blue,
+                                fontWeight: FontWeight.normal),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
