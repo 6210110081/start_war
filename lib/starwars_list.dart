@@ -25,24 +25,33 @@ class _StarwarsListState extends State<StarwarsList> {
   }
 
   Future<void> freshPeople() async {
-    var people = await _repo.repoPeopleStarwar(page: _page);
+    var people = await _repo.repoPeopleStarwar(_page);
+    print("page = $_page");
+    print(people[0].name);
     setState(() {
       _people = List<People>.from(_people);
       _people.addAll(people);
+      _page = _page + 1;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: _people.length,
       itemBuilder: (context, index) {
-        return ListTile(
-          title: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Text("${_people[index].name}"),
-          ]),
-        );
+        if (index < _people.length) {
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("${index + 1} ${_people[index].name}"),
+            ],
+          );
+        } else {
+          freshPeople();
+          return Center(child: CircularProgressIndicator());
+        }
       },
+      itemCount: _people.length + 1,
     );
   }
 }

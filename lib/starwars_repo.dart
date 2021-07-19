@@ -15,7 +15,7 @@ class People {
 
 class StarwarsRepo {
   var dio = Dio();
-  Future<List<People>> repoPeopleStarwar({int page = 1}) async {
+  Future<List<People>> repoPeopleStarwar(int page) async {
     var response = await dio.get('https://swapi.dev/api/people/?page=$page');
     List<dynamic> peopleStarwars = response.data['results'];
     return peopleStarwars.map((e) => People.fromJson(e)).toList();
