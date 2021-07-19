@@ -10,18 +10,38 @@ class StarwarsList extends StatefulWidget {
 }
 
 class _StarwarsListState extends State<StarwarsList> {
-  late final StarwarsRepo _repo;
+  final StarwarsRepo _repo;
   late List<People> _people;
-  late int _page;
+  // late int _page;
 
   _StarwarsListState() : _repo = new StarwarsRepo();
 
   @override
+  void initState() {
+    super.initState();
+    // _page = 1;
+    _people = [];
+    freshPeople();
+  }
+
+  Future<void> freshPeople() async {
+    var people = await _repo.repoPeopleStarwar();
+    setState(() {
+      _people = List<People>.from(_people);
+      _people.addAll(people);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 5,
-      itemBuilder: (BuildContext context, int index) {
-        return Text('data');
+      itemCount: _people.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+          title: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Text("${_people[index].name}"),
+          ]),
+        );
       },
     );
   }
