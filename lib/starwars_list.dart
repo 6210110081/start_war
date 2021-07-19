@@ -49,6 +49,14 @@ class _StarwarsListState extends State<StarwarsList> {
                     'https://starwars-visualguide.com/assets/img/characters/${index + 1}.jpg',
                     height: 200,
                     width: 200,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                        width: 200,
+                        height: 200,
+                        alignment: Alignment.center,
+                        child: Text('Whoops!', style: TextStyle(fontSize: 30)),
+                      );
+                    },
                   ),
                 ),
                 Container(
@@ -128,7 +136,7 @@ class _StarwarsListState extends State<StarwarsList> {
                                 fontWeight: FontWeight.normal),
                           ),
                           Text(
-                            "Birth Year : ${_people[index].bday}",
+                            "${_people[index].bday}",
                             style: TextStyle(
                                 fontSize: 20,
                                 color: Colors.blue,
