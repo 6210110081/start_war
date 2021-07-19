@@ -41,25 +41,38 @@ class _StarwarsListState extends State<StarwarsList> {
           return Card(
             child: Row(
               children: [
-                Flexible(
-                  flex: 1,
-                  child: Card(
-                    child: Image.network(
-                      'https://starwars-visualguide.com/assets/img/characters/${index + 1}.jpg',
-                      height: 200,
-                      width: 200,
-                    ),
+                Card(
+                  child: Image.network(
+                    'https://starwars-visualguide.com/assets/img/characters/${index + 1}.jpg',
+                    height: 200,
+                    width: 200,
                   ),
                 ),
-                Flexible(
-                  flex: 2,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text("${_people[index].name}"),
-                      Text("${_people[index].gender}")
-                    ],
-                  ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "${_people[index].name}",
+                      style: TextStyle(
+                          fontSize: 30,
+                          color: Colors.red,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "Height : ${_people[index].height}",
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black,
+                          fontWeight: FontWeight.normal),
+                    ),
+                    Text(
+                      "Gender : ${_people[index].gender}",
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black,
+                          fontWeight: FontWeight.normal),
+                    )
+                  ],
                 ),
               ],
             ),
