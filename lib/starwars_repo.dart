@@ -3,12 +3,14 @@ import 'package:dio/dio.dart';
 class People {
   String name;
   String gender;
-  People(this.name, this.gender);
+  String imageURL;
+  People(this.name, this.gender, this.imageURL);
 
   factory People.fromJson(dynamic data) {
     return People(
       data['name'],
       data['gender'],
+      data['url'],
     );
   }
 }
